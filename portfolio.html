@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mansi Kerai - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff; }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { width: 10px; height: 10px; top: 20%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 15px; height: 15px; top: 60%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 8px; height: 8px; top: 80%; left: 10%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-alt {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            margin: 0 auto;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .about-text {
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:nth-child(1) { animation-delay: 1.2s; }
+        .skill-card:nth-child(2) { animation-delay: 1.4s; }
+        .skill-card:nth-child(3) { animation-delay: 1.6s; }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .skill-card h3 {
+            color: #f39c12;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 1.5s; }
+        .project-card:nth-child(2) { animation-delay: 1.7s; }
+        .project-card:nth-child(3) { animation-delay: 1.9s; }
+        .project-card:nth-child(4) { animation-delay: 2.1s; }
+        .project-card:nth-child(5) { animation-delay: 2.3s; }
+
+        @keyframes scaleIn {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .project-header {
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Education & Certificates */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, #e74c3c, #f39c12);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+            animation: slideInLeft 0.6s ease;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            animation: slideInRight 0.6s ease;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background: #f39c12;
+            border: 4px solid #fff;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            color: white;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            animation: bounceIn 0.8s ease;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0%;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            border-radius: 4px;
+        }
+
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 1s ease 2s forwards;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+
+        .loader::before,
+        .loader::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top: 3px solid #e74c3c;
+            border-right: 3px solid #f39c12;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loader::after {
+            width: 40px;
+            height: 40px;
+            top: 10px;
+            left: 10px;
+            border-top: 3px solid #f39c12;
+            border-right: 3px solid #e74c3c;
+            animation: spin 1s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">MK</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="hero-content">
+            <h1>Mansi Kerai</h1>
+            <p class="subtitle">Computer Applications Student & Aspiring Developer</p>
+            <a href="#about" class="cta-button">Discover My Journey</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">MK</div>
+                <div class="about-text">
+                    <p>Hello! I'm Mansi Kerai, a passionate Computer Applications student at Marvadi University. I'm currently pursuing my Bachelor's degree in Computer Applications (Hons.) and have a strong interest in web development, mobile app development, and data analytics.</p>
+                    <br>
+                    <p>With hands-on experience in multiple programming languages and frameworks, I love creating innovative solutions that solve real-world problems. My journey in technology has led me to work on various projects ranging from mobile applications to web-based voting systems.</p>
+                    <br>
+                    <p>I'm fluent in English, Hindi, and Gujarati, and I bring strong communication and project coordination skills to every team I work with.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section-alt fade-in">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Android</span>
+                        <span class="skill-tag">SQLite</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Professional Skills</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Time Management</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Project Coordination</span>
+                        <span class="skill-tag">Team Coordination</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>Languages</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">English</span>
+                        <span class="skill-tag">Hindi</span>
+                        <span class="skill-tag">Gujarati</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Clockify - Task Time Analyzer</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>A comprehensive Android application for tracking and analyzing time spent on various tasks, helping users improve productivity and time management.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Android Studio</span>
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">XML</span>
+                            <span class="tech-tag">SQLite</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>DigiVote - Online Voting System</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>A secure and user-friendly online voting platform that enables digital democracy with robust authentication and real-time results.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">SQLite</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Nike Webpage</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>A modern, responsive recreation of Nike's website featuring clean design, smooth animations, and optimized user experience.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Billionaire's Analysis</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>A data-driven application that analyzes and visualizes information about billionaires worldwide, providing insights through interactive charts.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">Data Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Quiz Application</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>An interactive quiz application with multiple categories, score tracking, and user-friendly interface for educational purposes.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">SQLite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section-alt fade-in">
+        <div class="container">
+            <h2 class="section-title">Education & Certificates</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Bachelor's of Computer Applications (Hons.)</h3>
+                        <h4>Marvadi University</h4>
+                        <span>2022 - 2026</span>
+                        <p>Currently pursuing advanced studies in computer applications with honors, focusing on software development, data structures, and modern programming paradigms.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Higher Secondary Education</h3>
+                        <h4>Kendriya Vidhyalya No.2 Army (Bhuj)</h4>
+                        <span>2010 - 2022</span>
+                        <p>Completed primary, secondary, and higher secondary education with strong foundation in mathematics and science.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Machine Learning Certificates</h3>
+                        <h4>Professional Development</h4>
+                        <ul style="margin-top: 10px;">
+                            <li>Machine Learning Beginner Certificate</li>
+                            <li>Boosting Machine Learning Models in Python</li>
+                            <li>Explore Machine Learning using Python</li>
+                            <li>Data Analytics Essentials Certificate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-content">
+                <p>I'm always excited to discuss new opportunities and collaborations!</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>Email</h3>
+                        <p>mansipatel0080@gmail.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Location</h3>
+                        <p>Gujarat, India</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Auto-trigger animations with CSS only */
+        section {
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        section:nth-child(even) {
+            animation-delay: 0.7s;
+        }
+
+        section:nth-child(odd) {
+            animation-delay: 0.9s;
+        }
+
+        /* Remove fade-in class dependency */
+        .skill-card {
+            animation: slideUp 0.6s ease 1.2s both;
+        }
+
+        .project-card {
+            animation: scaleIn 0.6s ease 1.5s both;
+        }
+
+        .timeline-item {
+            animation: slideInLeft 0.8s ease 1.8s both;
+        }
+
+        .timeline-item:nth-child(even) {
+            animation: slideInRight 0.8s ease 1.8s both;
+        }
+
+        .contact-item {
+            animation: bounceIn 0.8s ease 2s both;
+        }
+
+        .contact-item:nth-child(2) {
+            animation-delay: 2.2s;
+        }
+    </style>
+</body>
+</html>
