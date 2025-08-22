@@ -10,6 +10,10 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: 'Arial', sans-serif;
@@ -564,6 +568,44 @@
         @keyframes fadeOut {
             to { opacity: 0; visibility: hidden; }
         }
+
+        /* Auto-trigger animations with CSS only */
+        section {
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        section:nth-child(even) {
+            animation-delay: 0.7s;
+        }
+
+        section:nth-child(odd) {
+            animation-delay: 0.9s;
+        }
+
+        /* Remove fade-in class dependency */
+        .skill-card {
+            animation: slideUp 0.6s ease 1.2s both;
+        }
+
+        .project-card {
+            animation: scaleIn 0.6s ease 1.5s both;
+        }
+
+        .timeline-item {
+            animation: slideInLeft 0.8s ease 1.8s both;
+        }
+
+        .timeline-item:nth-child(even) {
+            animation: slideInRight 0.8s ease 1.8s both;
+        }
+
+        .contact-item {
+            animation: bounceIn 0.8s ease 2s both;
+        }
+
+        .contact-item:nth-child(2) {
+            animation-delay: 2.2s;
+        }
     </style>
 </head>
 <body>
@@ -788,49 +830,5 @@
         </div>
     </section>
 
-    <style>
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Auto-trigger animations with CSS only */
-        section {
-            animation: fadeInUp 1s ease 0.5s both;
-        }
-
-        section:nth-child(even) {
-            animation-delay: 0.7s;
-        }
-
-        section:nth-child(odd) {
-            animation-delay: 0.9s;
-        }
-
-        /* Remove fade-in class dependency */
-        .skill-card {
-            animation: slideUp 0.6s ease 1.2s both;
-        }
-
-        .project-card {
-            animation: scaleIn 0.6s ease 1.5s both;
-        }
-
-        .timeline-item {
-            animation: slideInLeft 0.8s ease 1.8s both;
-        }
-
-        .timeline-item:nth-child(even) {
-            animation: slideInRight 0.8s ease 1.8s both;
-        }
-
-        .contact-item {
-            animation: bounceIn 0.8s ease 2s both;
-        }
-
-        .contact-item:nth-child(2) {
-            animation-delay: 2.2s;
-        }
-    </style>
 </body>
 </html>
