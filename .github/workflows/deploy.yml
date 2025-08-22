@@ -1,0 +1,26 @@
+name: Deploy to Netlify (Static)
+
+on:
+  push:
+    branches: [ "main" ]   # runs on push to main branch
+  workflow_dispatch:        # lets you run manually
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli@latest
+
+      - name: Deploy to Netlify (production)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          netlify deploy \
+            --dir=site \
+            --prod \
+            --message "GitHub Actions deploy: $GITHUB_SHA"
