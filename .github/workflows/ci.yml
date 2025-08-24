@@ -1,0 +1,34 @@
+name: CI (validate & test)
+
+on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1) Broken-link check (no Node needed)
+      - name: Check links in site/
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --verbose --no-progress site/**/*.html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2) HTML lint (optional, via action)
+      - name: HTMLHint
+        uses: Cyb3r-Jak3/htmlhint-action@v1.3.0
+        with:
+          path: "site/**/*.html"
+
+      # 3) CSS lint (optional if you split CSS later)
+      # - name: Stylelint
+      #   uses: wearerequired/lint-action@v2
+      #   with:
+      #     stylelint: true
+      #     stylelint_extensions: css

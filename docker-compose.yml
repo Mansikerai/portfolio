@@ -3,5 +3,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: portfolio
     ports:
       - "8081:80"
+    volumes:
+      - ./site:/usr/share/nginx/html
+
+
+
